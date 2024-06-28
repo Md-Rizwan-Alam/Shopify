@@ -1,0 +1,134 @@
+<!-- Code by CDesk Solutions -->
+<!-- Start of  Sticky Bottom Menu  Code -->
+
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    /* Add some styling for the sticky section */
+    .sticky-section {
+    position: fixed;
+    bottom: 0;
+    width: 100%!important;
+    background-color: #08AEBB;
+    padding: 0;
+    text-align: center;
+    z-index: 1100;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .11);
+    }
+    
+    /* Hide the sticky section on desktop screens */
+    @media only screen and (min-width: 768px) {
+      .sticky-section {
+      display: none;
+      }
+    }
+    
+    /* styling for the links */
+    .sticky-section a {
+      color: white;
+      text-decoration: none;
+      font-size: 10px;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+    }
+    
+    /* add font awesome icons */
+    .sticky-section i {
+      font-size: 18px!important;
+    }
+    
+    .Sticky-section-column {
+      align-items: center;
+      display: flex;
+      flex: 1 0 auto;
+      justify-content: center;
+      position: relative;
+    } 
+    .Sticky-section-column:last-child{
+      border-right: none!important;
+      padding: 0;
+    }
+    
+    /* Cart count bubble styling */
+    .cart-count {
+          position: relative;
+    background-color: white;
+    color: #FF8301;
+    height: 16px;
+    width: 16px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    bottom: -5px;
+    left: 15px;
+    line-height: calc(1 + .1 / var(--font-body-scale));
+    margin-bottom: -15px;
+    }
+  </style>
+
+<script>
+$(document).ready(function() {
+    // Listen for click events on add to cart buttons
+    $('.button-add-cart').on('click', function() {
+        // After adding to cart, update cart count
+        setTimeout(updateCartCount, 500); // Delay to ensure cart update has completed
+    });
+});
+
+// Function to update cart count
+function updateCartCount() {
+    // Make AJAX request to get updated cart data
+    $.getJSON('/cart.js', function(cart) {
+        // Update cart count on page
+        $('#cart-count-bubble').text(cart.item_count);
+    });
+}
+</script>
+  
+
+  <div class="sticky-section">
+
+   
+    
+    <div class="Sticky-section-column">
+      <a href="https://usatoyz.com/">
+         <i class="ri-home-8-line"></i>Home
+      </a>
+    </div>
+
+     <div class="Sticky-section-column Sticky-section-column-5">
+      <a href="https://usatoyz.com/collections/all-toys">
+       <i class="ri-layout-grid-line"></i>Categories
+      </a>
+    </div>
+   
+    <div class="Sticky-section-column">
+      <a href="/search">
+      <i class="ri-search-line"></i>Search
+      </a>
+    </div>
+                                                
+    <div class="Sticky-section-column">
+      <a href="/account">
+        <i class="ri-user-3-line"></i>Account
+      </a>
+    </div>
+                                                                   
+     <div class="Sticky-section-column">
+      <a href="/cart" onclick="openCartDrawer(); return false;" title="Shopping Cart">
+        <span class="cart-count" id="cart-count-bubble">{{ cart.item_count }}</span>     
+        <i class="ri-shopping-cart-2-line"></i>Cart
+        {% #<i class="ri-shopping-bag-line"></i> %}
+      </a>
+    </div>
+                                                                    
+                                                                   
+
+<!-- End of Sticky Bottom Menu Code -->
+
